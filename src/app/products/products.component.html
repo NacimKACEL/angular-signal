@@ -1,0 +1,49 @@
+<app-dashboard></app-dashboard>
+
+<app-add-product></app-add-product>
+
+<table mat-table [dataSource]="products()" class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> Id. </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef> Price </th>
+      <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="selected">
+        <th mat-header-cell *matHeaderCellDef> Selected </th>
+        <td mat-cell *matCellDef="let element">
+            @if(element.selected) {
+                <button mat-button (click)="selectProduct(element)">
+                    {{element.selected ? 'Unselect' : 'Select'}}
+                </button>
+            } @else {
+                <button mat-button (click)="selectProduct(element)">
+                    {{element.selected ? 'Unselect' : 'Select'}}
+                </button>
+            }
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element">
+            <button mat-button (click)="deleteProduct(element)">
+                delete
+            </button>
+        </td>
+      </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+
